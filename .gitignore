@@ -1,0 +1,9 @@
+# licensed fonts: each person installs their own (fontkit.py falls back to free Inter / Playfair)
+fonts/SF-Pro*
+fonts/HelveticaNeue*
+fonts/*Helvetica*
+# whisper models are huge; see scripts/words.py
+models/
+__pycache__/
+*.mp4
+*.mov

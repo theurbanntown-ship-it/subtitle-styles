@@ -1,0 +1,112 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700&family=Playfair+Display:ital,wght@0,700;1,700&family=Instrument+Serif:ital@0;1&family=Montserrat:wght@700&family=Mali:wght@700&display=swap">
+<style>
+.sp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;padding:1rem 0}
+.sp-tile{position:relative;height:150px;border-radius:12px;background:#3b3b3e;border:0.5px solid var(--border);cursor:pointer;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:0;font-family:Inter,sans-serif}
+.sp-tile:hover{outline:2px solid var(--border-accent)}
+.sp-name{position:absolute;left:10px;bottom:8px;font:500 12px var(--font-sans);color:#e9e9ea;background:rgba(0,0,0,.45);padding:2px 8px;border-radius:6px}
+.w{display:inline-block;opacity:0;color:#fff}
+@keyframes r0{0%,2%{opacity:0;transform:translateY(8px)}6%,90%{opacity:1;transform:none}96%,100%{opacity:0}}
+@keyframes r1{0%,8%{opacity:0;transform:translateY(8px)}12%,90%{opacity:1;transform:none}96%,100%{opacity:0}}
+@keyframes r2{0%,15%{opacity:0;transform:translateY(8px)}19%,90%{opacity:1;transform:none}96%,100%{opacity:0}}
+@keyframes r3{0%,22%{opacity:0;transform:translateY(8px)}26%,90%{opacity:1;transform:none}96%,100%{opacity:0}}
+@keyframes p0{0%,2%{opacity:0;transform:scale(1.25)}5%,90%{opacity:1;transform:scale(1)}96%,100%{opacity:0}}
+@keyframes p1{0%,9%{opacity:0;transform:scale(1.25)}12%,90%{opacity:1;transform:scale(1)}96%,100%{opacity:0}}
+@keyframes p2{0%,17%{opacity:0;transform:scale(1.25)}20%,90%{opacity:1;transform:scale(1)}96%,100%{opacity:0}}
+@keyframes o0{0%,2%{opacity:0;transform:translateY(6px)}4%,12%{opacity:1;transform:none}13%,100%{opacity:0}}
+@keyframes o1{0%,14%{opacity:0;transform:translateY(6px)}16%,24%{opacity:1;transform:none}25%,100%{opacity:0}}
+@keyframes h0{0%,27%{opacity:0;transform:translateY(8px)}31%,90%{opacity:1;transform:none}96%,100%{opacity:0}}
+@keyframes h1{0%,34%{opacity:0;transform:translateY(8px)}38%,90%{opacity:1;transform:none}96%,100%{opacity:0}}
+@keyframes c0{0%,3%{opacity:0;transform:scale(.55)}7%{opacity:1;transform:scale(1.08)}10%,90%{opacity:1;transform:scale(1)}96%,100%{opacity:0}}
+@keyframes b0{0%,2%{opacity:0;filter:blur(6px)}8%,90%{opacity:1;filter:blur(0)}96%,100%{opacity:0}}
+@keyframes b1{0%,12%{opacity:0;filter:blur(6px)}18%,90%{opacity:1;filter:blur(0)}96%,100%{opacity:0}}
+@keyframes b2{0%,22%{opacity:0;filter:blur(6px)}28%,90%{opacity:1;filter:blur(0)}96%,100%{opacity:0}}
+@keyframes d0{0%,2%{opacity:.35}6%,90%{opacity:1}96%,100%{opacity:0}}
+@keyframes d1{0%,12%{opacity:.35}16%,90%{opacity:1}96%,100%{opacity:0}}
+@keyframes d2{0%,22%{opacity:.35}26%,90%{opacity:1}96%,100%{opacity:0}}
+@keyframes k0{0%,2%{color:#000}3%,12%{color:#E0424A}13%,100%{color:#000}}
+@keyframes k1{0%,12%{opacity:0;color:#000}13%,24%{opacity:1;color:#E0424A}25%,90%{opacity:1;color:#000}96%,100%{opacity:0}}
+@keyframes k2{0%,24%{opacity:0;color:#000}25%,90%{opacity:1;color:#E0424A}96%,100%{opacity:0}}
+@keyframes s0{0%,2%{opacity:0}3%,90%{opacity:1}96%,100%{opacity:0}}
+@keyframes s1{0%,12%{opacity:0}13%,90%{opacity:1}96%,100%{opacity:0}}
+@keyframes s2{0%,24%{opacity:0}25%,90%{opacity:1}96%,100%{opacity:0}}
+</style>
+<h2 class="sr-only">Saved subtitle styles. Click a tile to use that style.</h2>
+<div class="sp-grid">
+
+<button type="button" class="sp-tile" onclick="sendPrompt('Go with Sub 1')" aria-label="Sub 1">
+ <div style="text-align:left;line-height:1.02;text-shadow:0 0 10px rgba(255,255,255,.55),0 2px 4px rgba(0,0,0,.25);letter-spacing:-.045em">
+  <div><span class="w" style="font:600 15px Inter;animation:r0 4s infinite">My</span> <span class="w" style="font:600 15px Inter;animation:r1 4s infinite">favourite</span></div>
+  <div><span class="w" style="font:800 30px Inter;animation:r2 4s infinite">adulting</span> <span class="w" style="font:800 30px Inter;animation:r3 4s infinite">upgrade</span></div>
+ </div>
+ <span class="sp-name">Sub 1 · clean white</span>
+</button>
+
+<button type="button" class="sp-tile" onclick="sendPrompt('Go with Sub 2')" aria-label="Sub 2">
+ <div style="position:relative;width:170px;height:110px">
+  <span class="w" style="position:absolute;left:38px;top:4px;font:800 24px Inter;letter-spacing:-.03em;text-shadow:3px 3px 0 #000;animation:p0 4s infinite">and</span>
+  <span class="w" style="position:absolute;left:78px;top:24px;font:800 24px Inter;letter-spacing:-.03em;text-shadow:3px 3px 0 #000;animation:p1 4s infinite">say</span>
+  <span class="w" style="position:absolute;left:10px;top:44px;font:700 42px 'Playfair Display';color:#5A76A7;-webkit-text-stroke:1.5px #fff;paint-order:stroke fill;text-shadow:2px 3px 2px rgba(0,0,0,.5);animation:p2 4s infinite">goodbye</span>
+ </div>
+ <span class="sp-name">Sub 2 · stair stack</span>
+</button>
+
+<button type="button" class="sp-tile" onclick="sendPrompt('Go with Sub 3')" aria-label="Sub 3">
+ <div style="position:relative;width:180px;height:110px;text-shadow:0 3px 6px rgba(0,0,0,.6);letter-spacing:-.03em">
+  <span class="w" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:700 30px Inter;animation:o0 4s infinite">so</span>
+  <span class="w" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:700 30px Inter;animation:o1 4s infinite">how</span>
+  <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:.92">
+   <span class="w" style="font:800 34px Inter;animation:h0 4s infinite">Up to</span>
+   <span class="w" style="font:800 40px Inter;color:#F8D24A;text-shadow:0 0 14px rgba(255,120,30,.9);animation:h1 4s infinite">26,000</span>
+  </div>
+ </div>
+ <span class="sp-name">Sub 3 · one word + hero + hook</span>
+</button>
+
+
+<button type="button" class="sp-tile" onclick="sendPrompt('Go with Sub 4')" aria-label="Sub 4">
+ <div style="text-align:left;font:700 22px Inter;letter-spacing:-.02em;line-height:1.12">
+  <div style="background:#FBF3E6;padding:2px 9px;display:inline-block"><span class="w" style="opacity:1;color:#000;animation:k0 4s infinite">who's</span> <span class="w" style="animation:k1 4s infinite">too</span></div><br>
+  <div style="background:#FBF3E6;padding:2px 9px;display:inline-block;min-width:60px"><span class="w" style="animation:k2 4s infinite">tired</span></div>
+ </div>
+ <span class="sp-name">Sub 4 · Adrian</span>
+</button>
+
+<button type="button" class="sp-tile" onclick="sendPrompt('Go with Sub 5')" aria-label="Sub 5">
+ <div style="font:400 30px 'Instrument Serif';color:#fff;text-align:center;line-height:1">
+  <span class="w" style="font-style:italic;animation:b0 4s infinite">tired</span> <span class="w" style="animation:b1 4s infinite">at</span> <span class="w" style="animation:b2 4s infinite">night</span>
+ </div>
+ <span class="sp-name">Sub 5 · Nora</span>
+</button>
+
+<button type="button" class="sp-tile" onclick="sendPrompt('Go with Sub 6')" aria-label="Sub 6">
+ <div class="w" style="display:flex;flex-direction:column;align-items:center;font:700 17px Montserrat;animation:c0 4s infinite">
+  <span style="background:#000;color:#fff;padding:2px 9px;border-radius:5px">night to</span>
+  <span style="background:#2CF018;color:#000;padding:2px 9px;border-radius:5px;transform:rotate(-2deg);margin-top:-1px">brush their</span>
+ </div>
+ <span class="sp-name">Sub 6 · Kendrick</span>
+</button>
+
+<button type="button" class="sp-tile" onclick="sendPrompt('Go with Sub 7')" aria-label="Sub 7">
+ <div style="color:#fff;text-align:center;font:700 20px Inter;letter-spacing:-.02em">
+  <span class="w" style="opacity:.35;font:italic 700 24px 'Playfair Display';animation:d0 4s infinite">Shout</span> <span class="w" style="opacity:.35;animation:d1 4s infinite">out to</span> <span class="w" style="opacity:.35;animation:d2 4s infinite">anyone</span>
+ </div>
+ <span class="sp-name">Sub 7 · Kelly</span>
+</button>
+
+<button type="button" class="sp-tile" onclick="sendPrompt('Go with Sub 8')" aria-label="Sub 8">
+ <div style="font:700 26px Mali;text-align:center">
+  <span class="w" style="opacity:.35;color:#FFEC00;animation:d0 4s infinite">Shout</span> <span class="w" style="opacity:.35;animation:d1 4s infinite">out</span>
+ </div>
+ <span class="sp-name">Sub 8 · Bob</span>
+</button>
+
+<button type="button" class="sp-tile" onclick="sendPrompt('Go with Sub 9')" aria-label="Sub 9">
+ <div style="text-align:right;font:500 24px Inter;letter-spacing:-.025em;line-height:.86;color:#fff">
+  <div><span class="w" style="animation:s0 4s infinite">look</span></div>
+  <div style="margin-right:-10px"><span class="w" style="animation:s1 4s infinite">at the</span></div>
+  <div><span class="w" style="font:italic 700 24px Inter;color:#E8FB44;animation:s2 4s infinite">difference</span></div>
+ </div>
+ <span class="sp-name">Sub 9 · Moxie</span>
+</button>
+
+</div>
