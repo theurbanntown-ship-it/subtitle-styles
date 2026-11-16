@@ -4,6 +4,8 @@ whole shot slowly zooms out with the text locked to it inside a dark oval vignet
 above the head, and the shot exits with a sideways whip blur into the next one.
 Usage: python -E -P sub3_hook.py clean.mp4 sub3_burned.mp4 out.mp4
   clean.mp4 = the edit without captions; sub3_burned.mp4 = the same edit run through sub3_captions.py (used after the cut).
+  out.mov = transparent ProRes 4444 layer of the hook text + doodles only (zoom and whip applied to the text; no footage,
+  no vignette): put it over the edit in Premiere. Frames after the hook are empty.
 Edit HOOK below per video (times come from words.txt; CUT = first frame of the next shot).
 """
 import math, random, subprocess, sys
@@ -120,9 +122,25 @@ def sparkle(d, x, y, s, tick, i):
     d.line(pts, fill=DOODLE_C + (255,), width=11, joint="curve")
 
 
+ALPHA = OUT.lower().endswith(".mov")
+
+
+def smear(im, dx, n=None):
+    """motion blur for a full RGBA layer without wrapping around the frame edges"""
+    if abs(dx) < 2:
+        return im
+    n = n or max(6, min(48, int(abs(dx) / 6))); p = int(abs(dx) / 2) + 2
+    big = Image.new("RGBA", (im.width + 2 * p, im.height), (0, 0, 0, 0)); big.paste(im, (p, 0))
+    acc = None
+    for i in range(n):
+        sh = Image.new("RGBA", big.size, (0, 0, 0, 0)); sh.paste(big, (int(dx * (i / (n - 1) - 0.5)), 0))
+        acc = sh if acc is None else Image.blend(acc, sh, 1 / (i + 1))
+    return acc.crop((p, 0, p + im.width, im.height))
+
+
 def hook_frame(clean, n):
     t = n / FPS
-    scene = clean.convert("RGBA")
+    scene = Image.new("RGBA", (W, H), (0, 0, 0, 0)) if ALPHA else clean.convert("RGBA")
     for wi, (text, s, st, ln, how, extra) in enumerate(WORDS):
         if t < s:
             continue
@@ -154,7 +172,8 @@ def hook_frame(clean, n):
     sc = ZOOM[0] + (ZOOM[1] - ZOOM[0]) * ease(n / CUT)
     big = scene.resize((int(W * sc), int(H * sc)), Image.BICUBIC)
     l, tp = (big.width - W) // 2, (big.height - H) // 2
-    return Image.alpha_composite(big.crop((l, tp, l + W, tp + H)), VIG)
+    big = big.crop((l, tp, l + W, tp + H))
+    return big if ALPHA else Image.alpha_composite(big, VIG)
 
 
 def rd(p):
@@ -166,15 +185,28 @@ src = lambda f: subprocess.Popen(["ffmpeg", "-v", "error", "-i", f, "-f", "rawvi
                                  stdout=subprocess.PIPE)
 pc, pb = src(CLEAN), src(BURNED)
 r = str(round(FPS, 3))
-out = subprocess.Popen(["ffmpeg", "-y", "-v", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", r,
-                        "-i", "-", "-i", CLEAN, "-map", "0:v", "-map", "1:a", "-c:v", "libx264", "-crf", "16",
-                        "-preset", "medium", "-pix_fmt", "yuv420p", "-c:a", "copy", "-shortest", OUT], stdin=subprocess.PIPE)
+out = subprocess.Popen(["ffmpeg", "-y", "-v", "error", "-f", "rawvideo", "-pix_fmt", "rgba" if ALPHA else "rgb24",
+                        "-s", f"{W}x{H}", "-r", r, "-i", "-"] +
+                       (["-c:v", "prores_ks", "-profile:v", "4", "-pix_fmt", "yuva444p10le", "-alpha_bits", "16", OUT] if ALPHA else
+                        ["-i", CLEAN, "-map", "0:v", "-map", "1:a", "-c:v", "libx264", "-crf", "16", "-preset", "medium",
+                         "-pix_fmt", "yuv420p", "-c:a", "copy", "-shortest", OUT]), stdin=subprocess.PIPE)
+EMPTY = bytes(W * H * 4)
 WHIP = 4                                   # frames of whip-out before the cut and whip-in after it
 n = 0
 while True:
     c, b = rd(pc), rd(pb)
     if c is None or b is None:
         break
+    if ALPHA:                               # text-only layer
+        if n < CUT:
+            f = hook_frame(c, n); k = n - (CUT - WHIP)
+            if k >= 0:
+                g = Image.new("RGBA", (W, H), (0, 0, 0, 0)); g.paste(f, (-int(70 * (k + 1) ** 1.5), 0))
+                f = smear(g, 90 * (k + 1))
+            out.stdin.write(f.tobytes())
+        else:
+            out.stdin.write(EMPTY)
+        n += 1; continue
     if n < CUT:
         f = hook_frame(c, n).convert("RGB")
         k = n - (CUT - WHIP)
