@@ -98,3 +98,14 @@ or pass `--keys`. `--y` is the block's vertical centre; `--moves` moves it off f
   1-2 words per line, up to 4 tight lines (leading 0.84) in a ragged right-aligned block; key words SF Pro Semibold Italic in
   lime #E8FB44; each word appears as it's spoken (no fade). Soft shadow.
 
+
+## Sub No. 10 "yellow key line" (saved 2026-11-20, from an Instagram "how I edit my videos on Claude" reel; first used on UGC "Perfora Two things V14 H1")
+
+The look:
+- **Small words:** white Inter Regular (wght 420) 46, tracking −2%. They build up one by one on the line as they are spoken (quick fade-in, 2 frames).
+- **Key words:** on their own line, Inter Black (900) 104 in yellow #F3EB57 (sampled from the reference), tracking −6.5% so the letters touch. Each word appears exactly on its spoken start and grows 92% → 100% over 2 frames.
+- **Layout:** a card is 1-3 lines (small line, key line, optional small line after). Lines are left-aligned inside a centred block whose top sits at y 1150 (chest height). Tight line stacking. A soft dark shadow (blur 6, ~35%) keeps it readable on light walls. The card clears when the next one starts.
+- **Text rules:** no punctuation. A line is either all key words or all small words (an assert checks this). A product name stays on one card ("This is the / *Perfora* / Oscillating Toothbrush"). You may fix misheard words in PAGES (e.g. "IPX7" for a spoken "IP7"); the script prints a note for each.
+- Not included: the small Claude logo the reference puts beside some key words (a graphic, not caption style).
+
+Steps: same as Sub No. 1, with `scripts/sub10_captions.py` (PAGES = one card per line, `/` = line break, `*word*` = key word, `@y` at the end of a line moves that card's top to y). Run `python -E -P sub10_captions.py edit.mp4 words.txt out.mp4|out.mov`; the frame rate is read from the input.
