@@ -109,3 +109,14 @@ The look:
 - Not included: the small Claude logo the reference puts beside some key words (a graphic, not caption style).
 
 Steps: same as Sub No. 1, with `scripts/sub10_captions.py` (PAGES = one card per line, `/` = line break, `*word*` = key word, `@y` at the end of a line moves that card's top to y). Run `python -E -P sub10_captions.py edit.mp4 words.txt out.mp4|out.mov`; the frame rate is read from the input.
+
+## Sub No. 11 "glowing yellow key" (saved 2026-11-25, from an Instagram Hinglish podcast reel)
+
+The look:
+- **Small words:** white Montserrat Bold 50, 1-3 per line, centred, baseline y 1124 (chest height). Each word cuts in on its spoken start (no fade); words appear at their final spot, so the line builds left to right. Faint dark shadow.
+- **Key word:** UPPERCASE Montserrat ExtraBold 108 in yellow #FFCC00 (sampled), centred on the same baseline, with a soft warm yellow glow behind it that lifts the footage. Cuts in on its spoken start. Long key lines shrink to fit 980 px.
+- **Small words with a key word:** the line before it sits right on top of it, flush with its LEFT edge ("apne / *HISAAB*"); the line after sits right under it, flush with its RIGHT edge ("*PLATFORM* / par aakar").
+- **Text rules:** no punctuation; one key line per card (max 3 lines); a line is all key or all small (asserts check both). Fix misheard words in PAGES; the script prints a note for each.
+- Not included: the reel's fixed yellow title bar at the top (a per-video graphic).
+
+Steps: same as Sub No. 1, with `scripts/sub11_captions.py` (PAGES = one card per line, `/` = line break, `*word*` = key word, `@y` at the end moves that card's baseline). Run `python -E -P sub11_captions.py edit.mp4 words.txt out.mp4|out.mov`; the frame rate is read from the input.
